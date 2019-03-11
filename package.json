@@ -1,0 +1,31 @@
+{
+  "name": "akmey",
+  "version": "0.0.1-alpha",
+  "description": "Akmey is an SSH keyserver, this is the cli client of Akmey, you can add keys with that.",
+  "main": "cli.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/akmey/akmey-nodejs.git"
+  },
+  "keywords": [
+    "akmey",
+    "client",
+    "sshkeys",
+    "ssh"
+  ],
+  "bin": {
+    "akmey": "cli.js"
+  },
+  "author": "leonekmi",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/akmey/akmey-nodejs/issues"
+  },
+  "homepage": "https://github.com/akmey/akmey-nodejs#readme",
+  "dependencies": {
+    "axios": "^0.18.0"
+  }
+}
