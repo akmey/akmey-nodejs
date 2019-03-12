@@ -31,15 +31,12 @@ akmey_token.apiKey = 'YOUR API KEY';
 //akmey_token.apiKeyPrefix = 'Token';
 
 var apiInstance = new Akmey.UserApi();
+apiInstance.userGet().then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.userGet(callback);
 ```
 
 ### Parameters
@@ -72,15 +69,12 @@ var apiInstance = new Akmey.UserApi();
 
 var query = "query_example"; // String | ID of user to return
 
+apiInstance.userMatchQueryGet(query).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.userMatchQueryGet(query, callback);
 ```
 
 ### Parameters
@@ -104,7 +98,7 @@ No authorization required
 
 <a name="userUserIdGet"></a>
 # **userUserIdGet**
-> userUserIdGet(userId)
+> User userUserIdGet(userId)
 
 Get user by its ID
 
@@ -116,15 +110,12 @@ var apiInstance = new Akmey.UserApi();
 
 var userId = 789; // Number | ID of user to return
 
+apiInstance.userUserIdGet(userId).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.userUserIdGet(userId, callback);
 ```
 
 ### Parameters
@@ -135,7 +126,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-null (empty response body)
+[**User**](User.md)
 
 ### Authorization
 

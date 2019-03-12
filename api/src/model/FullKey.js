@@ -17,32 +17,32 @@
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
-    define(['ApiClient', 'model/Key'], factory);
+    define(['ApiClient', 'model/LightUser'], factory);
   } else if (typeof module === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('./Key'));
+    module.exports = factory(require('../ApiClient'), require('./LightUser'));
   } else {
     // Browser globals (root is window)
     if (!root.Akmey) {
       root.Akmey = {};
     }
-    root.Akmey.User = factory(root.Akmey.ApiClient, root.Akmey.Key);
+    root.Akmey.FullKey = factory(root.Akmey.ApiClient, root.Akmey.LightUser);
   }
-}(this, function(ApiClient, Key) {
+}(this, function(ApiClient, LightUser) {
   'use strict';
 
 
 
 
   /**
-   * The User model module.
-   * @module model/User
+   * The FullKey model module.
+   * @module model/FullKey
    * @version 0.0.1-r2
    */
 
   /**
-   * Constructs a new <code>User</code>.
-   * @alias module:model/User
+   * Constructs a new <code>FullKey</code>.
+   * @alias module:model/FullKey
    * @class
    */
   var exports = function() {
@@ -58,11 +58,11 @@
   };
 
   /**
-   * Constructs a <code>User</code> from a plain JavaScript object, optionally creating a new instance.
+   * Constructs a <code>FullKey</code> from a plain JavaScript object, optionally creating a new instance.
    * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
    * @param {Object} data The plain JavaScript object bearing properties of interest.
-   * @param {module:model/User} obj Optional instance to populate.
-   * @return {module:model/User} The populated <code>User</code> instance.
+   * @param {module:model/FullKey} obj Optional instance to populate.
+   * @return {module:model/FullKey} The populated <code>FullKey</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
     if (data) {
@@ -71,14 +71,14 @@
       if (data.hasOwnProperty('id')) {
         obj['id'] = ApiClient.convertToType(data['id'], 'Number');
       }
-      if (data.hasOwnProperty('name')) {
-        obj['name'] = ApiClient.convertToType(data['name'], 'String');
+      if (data.hasOwnProperty('key')) {
+        obj['key'] = ApiClient.convertToType(data['key'], 'String');
       }
-      if (data.hasOwnProperty('email')) {
-        obj['email'] = ApiClient.convertToType(data['email'], 'String');
+      if (data.hasOwnProperty('comment')) {
+        obj['comment'] = ApiClient.convertToType(data['comment'], 'String');
       }
-      if (data.hasOwnProperty('email_verified_at')) {
-        obj['email_verified_at'] = ApiClient.convertToType(data['email_verified_at'], 'Date');
+      if (data.hasOwnProperty('user_id')) {
+        obj['user_id'] = ApiClient.convertToType(data['user_id'], 'Number');
       }
       if (data.hasOwnProperty('created_at')) {
         obj['created_at'] = ApiClient.convertToType(data['created_at'], 'Date');
@@ -86,8 +86,8 @@
       if (data.hasOwnProperty('updated_at')) {
         obj['updated_at'] = ApiClient.convertToType(data['updated_at'], 'Date');
       }
-      if (data.hasOwnProperty('keys')) {
-        obj['keys'] = ApiClient.convertToType(data['keys'], [Key]);
+      if (data.hasOwnProperty('user')) {
+        obj['user'] = LightUser.constructFromObject(data['user']);
       }
     }
     return obj;
@@ -98,17 +98,17 @@
    */
   exports.prototype['id'] = undefined;
   /**
-   * @member {String} name
+   * @member {String} key
    */
-  exports.prototype['name'] = undefined;
+  exports.prototype['key'] = undefined;
   /**
-   * @member {String} email
+   * @member {String} comment
    */
-  exports.prototype['email'] = undefined;
+  exports.prototype['comment'] = undefined;
   /**
-   * @member {Date} email_verified_at
+   * @member {Number} user_id
    */
-  exports.prototype['email_verified_at'] = undefined;
+  exports.prototype['user_id'] = undefined;
   /**
    * @member {Date} created_at
    */
@@ -118,9 +118,9 @@
    */
   exports.prototype['updated_at'] = undefined;
   /**
-   * @member {Array.<module:model/Key>} keys
+   * @member {module:model/LightUser} user
    */
-  exports.prototype['keys'] = undefined;
+  exports.prototype['user'] = undefined;
 
 
 

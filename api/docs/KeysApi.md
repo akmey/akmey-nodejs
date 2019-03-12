@@ -13,7 +13,7 @@ Method | HTTP request | Description
 
 <a name="keyFetchPost"></a>
 # **keyFetchPost**
-> Key keyFetchPost(key)
+> FullKey keyFetchPost(key)
 
 Fetch the key on Akmey
 
@@ -25,15 +25,12 @@ var apiInstance = new Akmey.KeysApi();
 
 var key = "key_example"; // String | Content of key (w/o comment) to return
 
+apiInstance.keyFetchPost(key).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.keyFetchPost(key, callback);
 ```
 
 ### Parameters
@@ -44,7 +41,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Key**](Key.md)
+[**FullKey**](FullKey.md)
 
 ### Authorization
 
@@ -80,15 +77,12 @@ var apiInstance = new Akmey.KeysApi();
 
 var key = "key_example"; // String | Content of key (w/o comment) to add
 
+apiInstance.keysAddPost(key).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.keysAddPost(key, callback);
 ```
 
 ### Parameters
@@ -135,15 +129,12 @@ var apiInstance = new Akmey.KeysApi();
 
 var keyId = "keyId_example"; // String | ID of key to remove
 
+apiInstance.keysKeyIdDelete(keyId).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.keysKeyIdDelete(keyId, callback);
 ```
 
 ### Parameters
@@ -167,7 +158,7 @@ Name | Type | Description  | Notes
 
 <a name="keysKeyIdGet"></a>
 # **keysKeyIdGet**
-> User keysKeyIdGet(keyId)
+> FullKey keysKeyIdGet(keyId)
 
 Get a key by its ID
 
@@ -179,15 +170,12 @@ var apiInstance = new Akmey.KeysApi();
 
 var keyId = "keyId_example"; // String | ID of key to return
 
+apiInstance.keysKeyIdGet(keyId).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.keysKeyIdGet(keyId, callback);
 ```
 
 ### Parameters
@@ -198,7 +186,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**User**](User.md)
+[**FullKey**](FullKey.md)
 
 ### Authorization
 
@@ -236,15 +224,12 @@ var keyId = "keyId_example"; // String | ID of key to edit
 
 var comment = "comment_example"; // String | Comment of the key
 
+apiInstance.keysKeyIdPut(keyId, comment).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.keysKeyIdPut(keyId, comment, callback);
 ```
 
 ### Parameters

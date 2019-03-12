@@ -31,7 +31,7 @@
   var instance;
 
   beforeEach(function() {
-    instance = new Akmey.Key();
+    instance = new Akmey.LightUser();
   });
 
   var getProperty = function(object, getter, property) {
@@ -50,46 +50,46 @@
       object[property] = value;
   }
 
-  describe('Key', function() {
-    it('should create an instance of Key', function() {
-      // uncomment below and update the code to test Key
-      //var instance = new Akmey.Key();
-      //expect(instance).to.be.a(Akmey.Key);
+  describe('LightUser', function() {
+    it('should create an instance of LightUser', function() {
+      // uncomment below and update the code to test LightUser
+      //var instance = new Akmey.LightUser();
+      //expect(instance).to.be.a(Akmey.LightUser);
     });
 
     it('should have the property id (base name: "id")', function() {
       // uncomment below and update the code to test the property id
-      //var instance = new Akmey.Key();
+      //var instance = new Akmey.LightUser();
       //expect(instance).to.be();
     });
 
-    it('should have the property key (base name: "key")', function() {
-      // uncomment below and update the code to test the property key
-      //var instance = new Akmey.Key();
+    it('should have the property name (base name: "name")', function() {
+      // uncomment below and update the code to test the property name
+      //var instance = new Akmey.LightUser();
       //expect(instance).to.be();
     });
 
-    it('should have the property comment (base name: "comment")', function() {
-      // uncomment below and update the code to test the property comment
-      //var instance = new Akmey.Key();
+    it('should have the property email (base name: "email")', function() {
+      // uncomment below and update the code to test the property email
+      //var instance = new Akmey.LightUser();
       //expect(instance).to.be();
     });
 
-    it('should have the property userId (base name: "user_id")', function() {
-      // uncomment below and update the code to test the property userId
-      //var instance = new Akmey.Key();
+    it('should have the property emailVerifiedAt (base name: "email_verified_at")', function() {
+      // uncomment below and update the code to test the property emailVerifiedAt
+      //var instance = new Akmey.LightUser();
       //expect(instance).to.be();
     });
 
     it('should have the property createdAt (base name: "created_at")', function() {
       // uncomment below and update the code to test the property createdAt
-      //var instance = new Akmey.Key();
+      //var instance = new Akmey.LightUser();
       //expect(instance).to.be();
     });
 
     it('should have the property updatedAt (base name: "updated_at")', function() {
       // uncomment below and update the code to test the property updatedAt
-      //var instance = new Akmey.Key();
+      //var instance = new Akmey.LightUser();
       //expect(instance).to.be();
     });
 

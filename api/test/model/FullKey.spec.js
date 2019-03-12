@@ -31,7 +31,7 @@
   var instance;
 
   beforeEach(function() {
-    instance = new Akmey.Key();
+    instance = new Akmey.FullKey();
   });
 
   var getProperty = function(object, getter, property) {
@@ -50,46 +50,52 @@
       object[property] = value;
   }
 
-  describe('Key', function() {
-    it('should create an instance of Key', function() {
-      // uncomment below and update the code to test Key
-      //var instance = new Akmey.Key();
-      //expect(instance).to.be.a(Akmey.Key);
+  describe('FullKey', function() {
+    it('should create an instance of FullKey', function() {
+      // uncomment below and update the code to test FullKey
+      //var instance = new Akmey.FullKey();
+      //expect(instance).to.be.a(Akmey.FullKey);
     });
 
     it('should have the property id (base name: "id")', function() {
       // uncomment below and update the code to test the property id
-      //var instance = new Akmey.Key();
+      //var instance = new Akmey.FullKey();
       //expect(instance).to.be();
     });
 
     it('should have the property key (base name: "key")', function() {
       // uncomment below and update the code to test the property key
-      //var instance = new Akmey.Key();
+      //var instance = new Akmey.FullKey();
       //expect(instance).to.be();
     });
 
     it('should have the property comment (base name: "comment")', function() {
       // uncomment below and update the code to test the property comment
-      //var instance = new Akmey.Key();
+      //var instance = new Akmey.FullKey();
       //expect(instance).to.be();
     });
 
     it('should have the property userId (base name: "user_id")', function() {
       // uncomment below and update the code to test the property userId
-      //var instance = new Akmey.Key();
+      //var instance = new Akmey.FullKey();
       //expect(instance).to.be();
     });
 
     it('should have the property createdAt (base name: "created_at")', function() {
       // uncomment below and update the code to test the property createdAt
-      //var instance = new Akmey.Key();
+      //var instance = new Akmey.FullKey();
       //expect(instance).to.be();
     });
 
     it('should have the property updatedAt (base name: "updated_at")', function() {
       // uncomment below and update the code to test the property updatedAt
-      //var instance = new Akmey.Key();
+      //var instance = new Akmey.FullKey();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property user (base name: "user")', function() {
+      // uncomment below and update the code to test the property user
+      //var instance = new Akmey.FullKey();
       //expect(instance).to.be();
     });
 
