@@ -200,6 +200,18 @@ function start() {
         }
     }
 
+    function list() {
+        spinner.succeed();
+        console.log(chalk.green.underline('Akmey installed keys in ' + db.path));
+        db.db.users.forEach(user => {
+            console.log(chalk.yellow.bold(' - ' + user.name));
+            user.keys.forEach(key => {
+                console.log(chalk.yellow('   - ' + key.comment) + chalk.red(' (' + key.key.substr(0, 25) + '...)'));
+            });
+        });
+        return true;
+    }
+
     program.version('0.0.1-alpha')
         .description('Akmey client can retreive keys from Akmey server and help you to manage it here.')
         .option('-t, --target <path>', 'Target file, where to add keys or remove keys', setPath)
@@ -221,6 +233,11 @@ function start() {
         .alias('u')
         .description('Update all or specific user by adding the new keys.')
         .action(update);
+
+    program.command('list')
+        .alias('ls')
+        .description('List all the installed keys')
+        .action(list);
 
     program.command('*')
         .action(function(_env) {

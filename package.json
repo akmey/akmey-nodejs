@@ -1,6 +1,6 @@
 {
   "name": "akmey",
-  "version": "0.0.3-alpha",
+  "version": "0.1.0-alpha",
   "description": "Akmey is an SSH keyserver, this is the cli client of Akmey, you can add keys with that.",
   "main": "api/src/index.js",
   "scripts": {
