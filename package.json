@@ -2,7 +2,7 @@
   "name": "akmey",
   "version": "0.0.1-alpha",
   "description": "Akmey is an SSH keyserver, this is the cli client of Akmey, you can add keys with that.",
-  "main": "cli.js",
+  "main": "api/src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
