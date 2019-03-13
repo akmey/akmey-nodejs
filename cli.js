@@ -172,28 +172,32 @@ function start() {
         }
     }
 
-    function update(cmd) {
-        spinner.succeed();
+    function update(cmd, silent = false) {
+        if (!silent) spinner.succeed();
         if (cmd) {
-            var getspin = ora('Updating user ' + cmd).start();
+            if (!silent) var getspin = ora('Updating user ' + cmd).start();
             api.userMatchQueryGet(cmd).then(data => {
                 var user = db.db.users.find(el => el.name == cmd);
                 if (user) {
-                    getspin.succeed();
+                    if (!silent) getspin.succeed();
                     db.removeKeys(user, true);
                     db.addKeys(data, undefined, true);
                 } else {
-                    getspin.warn('This user is not installed; installing instead');
-                    console.log(chalk.yellow('If you want to see installed users, please do `ls` command'));
+                    if (!silent) getspin.warn('This user is not installed; installing instead');
+                    if (!silent) console.log(chalk.yellow('If you want to see installed users, please do `ls` command'));
                     db.addKeys(data, undefined);
                 }
                 db.save();
                 conf.set('usercache.'+data.name, data);
             }, _error => {
-                getspin.fail('Cannot find user ' + cmd);
+                if (!silent) getspin.fail('Cannot find user ' + cmd);
+            });
+        } else {
+            spinner.succeed();
+            db.db.users.forEach(el => {
+                update(el.name, true);
             });
         }
-        
     }
 
     program.version('0.0.1-alpha')
