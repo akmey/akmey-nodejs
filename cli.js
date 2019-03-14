@@ -37,7 +37,7 @@ class AkmeyFile {
         this.nonce = this.akmeycontent[2];
         this.keys = this.akmeycontent[3];
         if (conf.get('db.'+this.nonce) === undefined) {
-            conf.set('db.'+this.nonce, {checksum: md5(this.content)});
+            conf.set('db.'+this.nonce, {checksum: md5(this.content), users: []});
         }
         this.db = conf.get('db.'+this.nonce);
     }
@@ -212,9 +212,42 @@ function start() {
         return true;
     }
 
-    program.version('0.0.1-alpha')
+    function reset() {
+        spinner.succeed();
+        var resetspin = ora('Resetting file').start();
+        db.db.users.forEach(user => {
+            db.removeKeys(user, true);
+            db.save();   
+        });
+        resetspin.succeed();
+    }
+
+    function reconfig() {
+        spinner.succeed();
+        const inquirer = require('inquirer');
+        inquirer.prompt([
+            {
+                name: 'sshfilepath',
+                message: 'Where is your SSH authorized_keys file (this file must exist) ?',
+                default: require('os').homedir() + '/.ssh/authorized_keys',
+                validate: function(input, answers) {
+                    if (require('fs').existsSync(input)) {
+                        return true;
+                    } else {
+                        return 'This file doesn\'t exist';
+                    }
+                }
+            }
+        ]).then(answers => {
+            conf.set('defaultpath', path.resolve(answers.sshfilepath));
+            conf.set('installed', true);
+            console.log(chalk.green('Akmey was successfully reconfigured!'));
+        });
+    }
+
+    program.version('0.2.0-alpha')
         .description('Akmey client can retreive keys from Akmey server and help you to manage it here.')
-        .option('-t, --target <path>', 'Target file, where to add keys or remove keys', setPath)
+        .option('-t, --target <path>', 'Target file, where to add or remove keys', setPath)
         .option('--insecure-server <server>', 'Override https enforcement and use http server', setHttpServer)
         .option('-s, --server <server>', 'Use a custom server (must be https, see --insecure-server)', setServer);
 
@@ -238,6 +271,16 @@ function start() {
         .alias('ls')
         .description('List all the installed keys')
         .action(list);
+
+    program.command('config')
+        .alias('cfg')
+        .description('Resetup Akmey')
+        .action(reconfig);
+
+    program.command('reset')
+        .alias('rst')
+        .description('Delete ALL keys from Akmey on your file')
+        .action(reset);
 
     program.command('*')
         .action(function(_env) {
