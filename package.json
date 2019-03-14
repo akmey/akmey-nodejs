@@ -1,6 +1,6 @@
 {
   "name": "akmey",
-  "version": "0.2.1-beta",
+  "version": "0.2.2-beta",
   "description": "Akmey is an SSH keyserver, this is the cli client of Akmey, you can add keys with that.",
   "main": "api/src/index.js",
   "scripts": {
@@ -32,7 +32,6 @@
     "inquirer": "^6.2.2",
     "md5": "^2.2.1",
     "ora": "^3.2.0",
-    "replace": "^1.1.0",
     "superagent": "3.7.0"
   },
   "devDependencies": {
