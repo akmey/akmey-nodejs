@@ -248,7 +248,7 @@ function start() {
         });
     }
 
-    program.version('0.2.0-alpha')
+    program.version('0.2.3-beta')
         .description('Akmey client can retreive keys from Akmey server and help you to manage it here.')
         .option('-t, --target <path>', 'Target file, where to add or remove keys', setPath)
         .option('--insecure-server <server>', 'Override https enforcement and use http server', setHttpServer)
