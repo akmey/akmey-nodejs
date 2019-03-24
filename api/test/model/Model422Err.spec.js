@@ -31,7 +31,7 @@
   var instance;
 
   beforeEach(function() {
-    instance = new Akmey.UserApi();
+    instance = new Akmey.Model422Err();
   });
 
   var getProperty = function(object, getter, property) {
@@ -50,37 +50,25 @@
       object[property] = value;
   }
 
-  describe('UserApi', function() {
-    describe('userGet', function() {
-      it('should call userGet successfully', function(done) {
-        //uncomment below and update the code to test userGet
-        //instance.userGet(function(error) {
-        //  if (error) throw error;
-        //expect().to.be();
-        //});
-        done();
-      });
+  describe('Model422Err', function() {
+    it('should create an instance of Model422Err', function() {
+      // uncomment below and update the code to test Model422Err
+      //var instance = new Akmey.Model422Err();
+      //expect(instance).to.be.a(Akmey.Model422Err);
     });
-    describe('userMatchQueryGet', function() {
-      it('should call userMatchQueryGet successfully', function(done) {
-        //uncomment below and update the code to test userMatchQueryGet
-        //instance.userMatchQueryGet(function(error) {
-        //  if (error) throw error;
-        //expect().to.be();
-        //});
-        done();
-      });
+
+    it('should have the property message (base name: "message")', function() {
+      // uncomment below and update the code to test the property message
+      //var instance = new Akmey.Model422Err();
+      //expect(instance).to.be();
     });
-    describe('userUserIdGet', function() {
-      it('should call userUserIdGet successfully', function(done) {
-        //uncomment below and update the code to test userUserIdGet
-        //instance.userUserIdGet(function(error) {
-        //  if (error) throw error;
-        //expect().to.be();
-        //});
-        done();
-      });
+
+    it('should have the property errors (base name: "errors")', function() {
+      // uncomment below and update the code to test the property errors
+      //var instance = new Akmey.Model422Err();
+      //expect(instance).to.be();
     });
+
   });
 
 }));

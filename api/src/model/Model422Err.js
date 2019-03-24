@@ -26,7 +26,7 @@
     if (!root.Akmey) {
       root.Akmey = {};
     }
-    root.Akmey.DeleteResponse = factory(root.Akmey.ApiClient);
+    root.Akmey.Model422Err = factory(root.Akmey.ApiClient);
   }
 }(this, function(ApiClient) {
   'use strict';
@@ -35,44 +35,52 @@
 
 
   /**
-   * The DeleteResponse model module.
-   * @module model/DeleteResponse
+   * The Model422Err model module.
+   * @module model/Model422Err
    * @version 0.0.1-r3
    */
 
   /**
-   * Constructs a new <code>DeleteResponse</code>.
-   * @alias module:model/DeleteResponse
+   * Constructs a new <code>Model422Err</code>.
+   * @alias module:model/Model422Err
    * @class
    */
   var exports = function() {
     var _this = this;
 
 
+
   };
 
   /**
-   * Constructs a <code>DeleteResponse</code> from a plain JavaScript object, optionally creating a new instance.
+   * Constructs a <code>Model422Err</code> from a plain JavaScript object, optionally creating a new instance.
    * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
    * @param {Object} data The plain JavaScript object bearing properties of interest.
-   * @param {module:model/DeleteResponse} obj Optional instance to populate.
-   * @return {module:model/DeleteResponse} The populated <code>DeleteResponse</code> instance.
+   * @param {module:model/Model422Err} obj Optional instance to populate.
+   * @return {module:model/Model422Err} The populated <code>Model422Err</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
     if (data) {
       obj = obj || new exports();
 
-      if (data.hasOwnProperty('success')) {
-        obj['success'] = ApiClient.convertToType(data['success'], 'Boolean');
+      if (data.hasOwnProperty('message')) {
+        obj['message'] = ApiClient.convertToType(data['message'], 'String');
+      }
+      if (data.hasOwnProperty('errors')) {
+        obj['errors'] = ApiClient.convertToType(data['errors'], Object);
       }
     }
     return obj;
   }
 
   /**
-   * @member {Boolean} success
+   * @member {String} message
    */
-  exports.prototype['success'] = undefined;
+  exports.prototype['message'] = undefined;
+  /**
+   * @member {Object} errors
+   */
+  exports.prototype['errors'] = undefined;
 
 
 
