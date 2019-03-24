@@ -129,7 +129,7 @@ function start() {
             db = new AkmeyFile(fullpath, filecontent);
             return true;
         } else {
-            spinner.fail('The target file (-t; ' + param + ') does not exist');
+            spinner.fail('The target file (-t ' + param + ') does not exist');
             process.exit(1);
             return false;
         }
@@ -161,7 +161,7 @@ function start() {
 
     function remove(cmd) {
         spinner.succeed();
-        var getspin = ora('Searching for user ' + cmd).start();
+        var getspin = ora('Searching user ' + cmd).start();
         var user = db.db.users.find(el => el.name == cmd);
         if (user) {
             getspin.succeed();
