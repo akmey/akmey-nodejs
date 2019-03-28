@@ -5,7 +5,8 @@ Licensed under GPLv3
 (c) 2019 - Akmey contributors
 */
 
-const akmey = require('./api');
+// const akmey = require('./api');
+const axios = require('axios');
 const program = require('commander');
 const ora = require('ora');
 const spinner = ora('Hello, loading Akmey client').start();
@@ -119,7 +120,9 @@ class AkmeyFile {
 
 function start() {
     var db = new AkmeyFile(conf.get('defaultpath'), fs.readFileSync(conf.get('defaultpath')));
-    var api = new akmey.UserApi();
+    var api = axios.create({
+        baseURL: 'https://akmey.leonekmi.fr/api/'
+    });
 
     function setPath(param) {
         if (fs.existsSync(param)) {
@@ -136,24 +139,24 @@ function start() {
     }
 
     function setHttpServer(param) {
-        akmey.ApiClient.instance.basePath = 'http://' + param + '/api';
+        api.defaults.baseURL = 'http://' + param + '/api/';
         return true;
     }
 
     function setServer(param) {
-        akmey.ApiClient.instance.basePath = 'https://' + param + '/api';
+        api.defaults.baseURL = 'https://' + param + '/api/';
         return true;
     }
 
     function install(cmd, options) {
         spinner.succeed();
         var getspin = ora('Searching for user ' + cmd).start();
-        api.userMatchQueryGet(cmd).then(data => {
+        api.get('user/match/'+cmd).then(data => {
             getspin.succeed();
             // console.log(data.keys);
-            db.addKeys(data, options.key);
+            db.addKeys(data.data, options.key);
             db.save();
-            conf.set('usercache.'+data.name, data);
+            conf.set('usercache.'+data.data.name, data.data);
         }, error => {
             getspin.fail('Cannot find user ' + cmd);
         });
@@ -177,16 +180,16 @@ function start() {
         if (!silent) spinner.succeed();
         if (cmd) {
             var getspin = ora('Updating user ' + cmd).start();
-            api.userMatchQueryGet(cmd).then(data => {
-                var user = db.db.users.find(el => el.name == cmd);
+            api.get('user/match/'+cmd).then(data => {
+                var user = db.db.users.find(el => el.id == data.data.id);
                 if (user) {
                     getspin.succeed();
                     db.removeKeys(user, true);
-                    db.addKeys(data, undefined, true);
+                    db.addKeys(data.data, undefined, true);
                 } else {
                     getspin.warn('This user is not installed; installing instead');
                     console.log(chalk.yellow('If you want to see installed users, please do `ls` command'));
-                    db.addKeys(data, undefined);
+                    db.addKeys(data.data, undefined);
                 }
                 db.save();
                 conf.set('usercache.'+data.name, data);
@@ -248,7 +251,7 @@ function start() {
         });
     }
 
-    program.version('0.2.3-beta')
+    program.version('0.2.4-beta')
         .description('Akmey client can retreive keys from Akmey server and help you to manage it here.')
         .option('-t, --target <path>', 'Target file, where to add or remove keys', setPath)
         .option('--insecure-server <server>', 'Override https enforcement and use http server', setHttpServer)
