@@ -88,6 +88,7 @@ class AkmeyFile {
             if (load) load.fail('This file does not contain any keys.');
             return false;
         } else {
+            user = this.db.users.find(el => el.id == user.id) // Sync the entry to avoid residues
             if (this.db.users.find(el => el.id == user.id)) {
                 this.db.users = this.db.users.filter(el => el.id != user.id);
             } else {
@@ -100,6 +101,36 @@ class AkmeyFile {
             if (load) load.succeed();
         }
         return true;
+    }
+
+    addTeam(team, silent = false) {
+        if (!silent) var load = ora('Adding member\'s keys').start();
+        // Save team to database
+        if (!this.db.teams) this.db.teams = [];
+        if (this.db.teams.find(el => el.id == team.id)) {
+            if (load) load.fail('This team is already installed');
+            return false;
+        } else {
+            this.db.teams.push(team);
+            if (load) load.succeed();
+            return true;
+        }
+        
+    }
+
+    removeTeam(team, silent = false) {
+        if (!silent) var load = ora('Removing member\'s keys').start();
+        // Remove teams from databse
+        if (!this.db.teams) this.db.teams = [];
+        if (this.db.teams.find(el => el.id == team.id)) {
+            this.db.teams = this.db.teams.filter(el => el.id != team.id);
+            if (load) load.succeed();
+            return true;
+        } else {
+            if (load) load.fail('This team is already installed');
+            return false;
+        }
+        
     }
 
     save() {
@@ -160,6 +191,39 @@ function start() {
         }, error => {
             getspin.fail('Cannot find user ' + cmd);
         });
+    }
+
+    function teaminstall(cmd) {
+        spinner.succeed();
+        var getspin = ora('Searching for team ' + cmd).start();
+        api.get('team/match/'+cmd).then(data => {
+            getspin.succeed();
+            // console.log(data.keys);
+            data.data.users.forEach(user => {
+                db.addKeys(user, null, true);
+                conf.set('usercache.'+user.name, user);
+            });
+            db.addTeam(data.data);
+            db.save();
+        }, error => {
+            getspin.fail('Cannot find team ' + cmd);
+        });
+    }
+
+    function teamremove(cmd) {
+        spinner.succeed();
+        var getspin = ora('Searching team ' + cmd).start();
+        var team = db.db.teams.find(el => el.name == cmd);
+        if (team) {
+            getspin.succeed();
+            team.users.forEach(user => {
+                db.removeKeys(user, true);
+            });
+            db.removeTeam(team);
+            db.save();
+        } else {
+            getspin.fail('This team is not installed');
+        }
     }
 
     function remove(cmd) {
@@ -251,7 +315,7 @@ function start() {
         });
     }
 
-    program.version('0.2.4-beta')
+    program.version('0.3.1-beta')
         .description('Akmey client can retreive keys from Akmey server and help you to manage it here.')
         .option('-t, --target <path>', 'Target file, where to add or remove keys', setPath)
         .option('--insecure-server <server>', 'Override https enforcement and use http server', setHttpServer)
@@ -262,6 +326,16 @@ function start() {
         .description('Add user\'s keys.')
         .option('-k, --key [keyname]', 'Add a specific key only')
         .action(install);
+
+    program.command('teaminstall <team>')
+        .alias('ti')
+        .description('Add team\'s keys')
+        .action(teaminstall);
+
+    program.command('teamremove <team>')
+        .alias('tr')
+        .description('Remove team\'s keys')
+        .action(teamremove);
 
     program.command('remove <user>')
         .alias('r')
