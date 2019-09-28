@@ -1,6 +1,6 @@
 {
   "name": "akmey",
-  "version": "0.3.1-beta",
+  "version": "0.3.2-beta",
   "description": "Akmey is an SSH keyserver, this is the cli client of Akmey, you can add keys with that.",
   "main": "cli.js",
   "repository": {
@@ -23,13 +23,13 @@
   },
   "homepage": "https://github.com/akmey/akmey-nodejs#readme",
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.18.1",
     "chalk": "^2.4.2",
-    "commander": "^2.19.0",
+    "commander": "^2.20.0",
     "configstore": "^4.0.0",
-    "inquirer": "^6.2.2",
+    "inquirer": "^6.5.2",
     "md5": "^2.2.1",
-    "ora": "^3.2.0"
+    "ora": "^3.4.0"
   },
   "devDependencies": {}
 }
